@@ -1,14 +1,20 @@
-import React, { FC, useState, useRef, useEffect } from 'react';
+import React, {
+    FC,
+    useState,
+    useRef,
+    useEffect
+} from 'react';
 import {
     StyleSheet,
     Text,
     Platform,
     View,
-    Dimensions
+    Dimensions,
+    TouchableOpacity
 } from 'react-native';
 import RNOtpVerify from 'react-native-otp-verify';
 
-import { BottomCardContainer } from 'src/components';
+import { BottomCardContainer, SvgIcon } from 'src/components';
 import { AuthScreenContainer } from 'src/containers';
 
 import OTPInputView from 'src/components/OTPINPUT';
@@ -19,12 +25,41 @@ let totalTime = 60;
 
 const { height, width } = Dimensions.get('window');
 
-const OtpVerficationScreen: FC<{ navigation: any }> = ({ navigation }) => {
-    const [otp_entered, setotp_entered] = useState(false);
+
+const PhoneEditingComp: FC<{ phoneNumber: string, onEdit: () => any }> = ({ phoneNumber, onEdit }) => {
+
+    return (
+        <View>
+            <Text style={{
+                color: "white",
+                marginVertical: Constants.ResponsiveSize.f15,
+                fontSize: 18,
+            }}>We have sent the otp on</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                <Text
+                    style={{
+                        color: "white",
+                        marginRight: Constants.ResponsiveSize.f15,
+                        fontSize: 20,
+                        fontWeight: 'bold'
+                    }} >{phoneNumber}</Text>
+                <SvgIcon
+                    onPress={onEdit}
+                    name='editing-pen'
+                    height={Constants.ResponsiveSize.f24}
+                    width={Constants.ResponsiveSize.f24} />
+
+            </View>
+        </View>
+    )
+}
+const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation, route }) => {
     const [otpCode, setOtpCode] = useState('');
     const [countDownTime, setCountDownTime] = useState(totalTime);
     const [isFirstTime, setIsFirstTime] = useState(false);
     const [showNotification, setShowNotification] = useState(true);
+
+    const { phoneNumber } = route.params;
 
     const OtpRef = useRef<any>(null);
 
@@ -49,10 +84,11 @@ const OtpVerficationScreen: FC<{ navigation: any }> = ({ navigation }) => {
     const onInitScreen = async () => {
         try {
             if (Platform.OS == 'android') {
-                const OTP = await RNOtpVerify.getOtp();
+                await RNOtpVerify.getOtp();
                 RNOtpVerify.addListener(message => {
                     try {
                         if (message) {
+                            1
                             console.log(message);
                             // setotpCode(message)
                             OtpRef.current.pullDataFromSms();
@@ -78,25 +114,25 @@ const OtpVerficationScreen: FC<{ navigation: any }> = ({ navigation }) => {
     }
 
     const onResendCode = () => {
-        // const lang = selectedLanguage;
         setShowNotification(true)
-        // const data = ResendVerificationCode + '?lang=' + selectedLanguage + '&otphash=' + otpHash
-        // callResendVerificationUserCode(data, auth_token)
     }
 
     const onOTPCOdeFilled = (code: any) => {
         navigation.navigate('AgeDetails')
-        setotp_entered(true);
     };
 
     const onOTPCodeChanged = (code: any) => {
         setOtpCode(code)
     };
 
-
     return (
-        <AuthScreenContainer>
-            <BottomCardContainer title='Login' subTitle='Enter valid mobile number , we will send you Otp Verfication'>
+        <AuthScreenContainer showBackBtm>
+            <BottomCardContainer
+                title='Verify Otp'
+                subTitle=''
+                subTitleComp={<PhoneEditingComp phoneNumber={phoneNumber} onEdit={() => {
+                    console.log('Hello')
+                }} />}>
                 <Text style={{ color: "white", fontWeight: 'bold', fontSize: 16 }} onPress={onOTPCOdeFilled}> Enter OTP</Text>
                 <View style={styles.bottomSheetContentContainer}>
                     <OTPInputView
@@ -104,6 +140,7 @@ const OtpVerficationScreen: FC<{ navigation: any }> = ({ navigation }) => {
                         ref={OtpRef}
                         pinCount={5}
                         code={otpCode}
+
                         placeholderCharacter="0"
                         placeholderTextColor={'#A09A9A'}
                         codeInputFieldStyle={styles.otpInput}
@@ -117,17 +154,18 @@ const OtpVerficationScreen: FC<{ navigation: any }> = ({ navigation }) => {
                 </View>
                 <View style={styles.centerRow}>
                     <Text style={{ color: 'white', marginHorizontal: 15 }}>
-                        Resend OTP
+                        Reading OTP
                     </Text>
-                    <Text style={{ color: "yellow" }}>
+                    <Text style={{ ...theme.Fonts.Main.header2, color: theme.Colors.yellow.default }}>
                         {countDownTime ? countDownTime : 10}
                     </Text>
                 </View>
-                <View style={styles.centerRow}>
+                <TouchableOpacity style={styles.centerRow} onPress={onResendCode}>
+                    <SvgIcon name='chat' height={Constants.ResponsiveSize.f26} width={Constants.ResponsiveSize.f26} />
                     <Text style={{ color: 'white', marginHorizontal: 15 }}>
                         Resend SMS
                     </Text>
-                </View>
+                </TouchableOpacity>
             </BottomCardContainer>
         </AuthScreenContainer>
     );
@@ -145,10 +183,13 @@ const styles = StyleSheet.create({
         flex: 1
     },
     otpInput: {
+        ...theme.Fonts.Main.header1,
         backgroundColor: '#02201B',
         borderColor: theme.Colors.primary,
         borderWidth: .2,
         color: 'white',
+        height: Constants.ResponsiveSize.f70,
+        width: Constants.ResponsiveSize.f70,
         borderRadius: 5
     },
     textStyle: {
@@ -158,6 +199,9 @@ const styles = StyleSheet.create({
         color: theme.Colors.text,
     },
     centerRow: {
-        flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center'
+        flex: 1,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 })

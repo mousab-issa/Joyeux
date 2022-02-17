@@ -17,7 +17,7 @@ import { HomeTabs } from '../HomeStack/homeTabs';
 
 type RootStackParamList = {
     PhoneNumber: undefined;
-    OtpVerfication: undefined;
+    OtpVerfication: { phoneNumber: string };
     AgeDetails: undefined;
     ChooseGender: undefined;
     UsernameDetails: undefined;

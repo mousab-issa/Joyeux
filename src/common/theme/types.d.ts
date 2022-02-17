@@ -36,10 +36,13 @@ interface ColorsType {
     default: string;
     light: string;
   };
+  yellow: {
+    default: string;
+  };
 }
 
 // Theme Type
 interface themeType {
   Colors: ColorsType;
-  Fonts?: FontFamilyType;
+  Fonts: FontFamilyType;
 }

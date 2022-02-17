@@ -23,16 +23,16 @@ const Item: FC<{ i: number; onPressItem: () => any; height: number }> = memo(({ 
 });
 
 const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ data }) => {
-    const DATA = useMemo(() => data, [data])
-
-    const flatListRef = useRef<null | FlatList<any>>(null)
-
     const [choosenValue, setChoosenValue] = useState<number | null>(null)
     const [height, setHeight] = useState<number>(0);
     const [showEditingText, setShowEditingText] = useState<boolean>(false);
     const [enableTopButton, SetEnableTopButton] = useState<boolean>(true);
     const [enableBottomButton, setEnableBottomButton] = useState<boolean>(true);
     const [currIndex, setCurrIndex] = useState<number>(0);
+
+    const flatListRef = useRef<null | FlatList<any>>(null)
+
+    const DATA = useMemo(() => data, [data])
 
     const onUpdateHeight = (e: LayoutChangeEvent) => {
         setHeight(e.nativeEvent.layout.height);
@@ -52,8 +52,15 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
         setCurrIndex(pageNum)
     }
 
-    const onShowEditingForm = () => {
+    const onShowEditing = () => {
         setShowEditingText(true);
+    }
+
+    const onEditing = (date: string) => {
+        const foundIndex = DATA.findIndex(item => item === date);
+        if (foundIndex > -1) {
+            setCurrIndex(foundIndex)
+        }
     }
 
     const onFinishEditing = () => {
@@ -67,7 +74,7 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
         setCurrIndex(prevI => prevI - 1);
     }
 
-    const onDownClick = () => {
+    const onDownPressed = () => {
         if (currIndex === DATA.length - 1) {
             return;
         }
@@ -85,7 +92,7 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
     useEffect(() => {
         setChoosenValue(DATA[currIndex])
         flatListRef.current?.scrollToIndex({ index: currIndex, animated: true })
-    }, [currIndex])
+    }, [currIndex]);
 
     return (
         <View style={styles.container}>
@@ -107,11 +114,12 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                         contentContainerStyle={{ flexGrow: 1 }}
                         onMomentumScrollEnd={onScrollEnd}
                         data={DATA}
+
                         renderItem={({ item, index }) => (
                             <Item
                                 key={index}
                                 height={height}
-                                onPressItem={onShowEditingForm}
+                                onPressItem={onShowEditing}
                                 i={item}
                             />
                         )}
@@ -125,6 +133,7 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                             style={styles.textStyle}
                             keyboardType={'numeric'}
                             maxLength={4}
+                            onChangeText={onEditing}
                             onEndEditing={onFinishEditing}
                             onPressOut={onFinishEditing}
                             onBlur={onFinishEditing}
@@ -132,7 +141,7 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                     </View>
                 }
             </View>
-            <Pressable onPress={onDownClick} >
+            <Pressable onPress={onDownPressed} >
                 <SvgIcon
                     name='chevron-down'
                     height={Constants.ResponsiveSize.f30}
@@ -156,18 +165,18 @@ const DatePicker = () => {
 }
 
 const styles = StyleSheet.create({
-    pickerConatiner: {        
+    pickerConatiner: {
         flexDirection: "row",
-        flex:1,
+        flex: 1,
     },
     container: {
-        flex:1,
-        height:30,
+        flex: 1,
+        height: 30,
         alignItems: 'center',
         marginHorizontal: 10
     },
     slectItemContainer: {
-        minHeight:60,
+        minHeight: 60,
         flex: 1,
         width: '100%',
         backgroundColor: '#02201B',

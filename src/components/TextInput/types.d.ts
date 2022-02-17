@@ -9,5 +9,5 @@ export interface TextInputTypes {
   label?: string;
   type?: KeyboardTypeOptions;
   placeHolder?: string;
-  onChange: (c: NativeSyntheticEvent<TextInputChangeEventData>) => any;
+  onChange: (c: string) => any;
 }

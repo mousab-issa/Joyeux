@@ -1,18 +1,25 @@
 import React, { FC } from 'react';
-import { ImageBackground, StyleSheet, Text, View, Image, Pressable } from 'react-native';
+import { StyleSheet, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import Constants, { WIDTH } from 'src/common/constants';
 import { SvgIcon } from 'src/components';
 
-import DefaultImage from 'src/lib/assets/Svg/BackGround.svg';
+import BackgroundImage from 'src/lib/assets/Svg/BackGround.svg';
+import Logo from 'src/lib/assets/Svg/WordMark.svg';
 
-const AuthScreenContainer: FC<{ onClick?: () => any }> = ({ children, onClick }) => {
 
+const AuthScreenContainer: FC<{ onClick?: () => any, showBackBtm?: boolean }> = ({ children, onClick, showBackBtm }) => {
     return (
         <View style={styles.container}>
-                <View style={{ position: 'absolute' }}>
-                    <DefaultImage />
-                </View>
-                <SafeAreaView style={styles.container}>
+            <View style={{ position: 'absolute' }}>
+                <BackgroundImage />
+            </View>
+            <View style={styles.LogoContainer}>
+                <Logo height={Constants.ResponsiveSize.f130} />
+            </View>
+            <SafeAreaView style={styles.container}>
+                {
+                    showBackBtm &&
                     <Pressable style={{ alignItems: 'flex-start', left: 20, position: 'relative' }} onPress={onClick}>
                         <SvgIcon
                             height={20}
@@ -20,8 +27,9 @@ const AuthScreenContainer: FC<{ onClick?: () => any }> = ({ children, onClick })
                             name="chevron-left"
                         />
                     </Pressable>
-                    {children}
-                </SafeAreaView>
+                }
+                {children}
+            </SafeAreaView>
         </View>
     );
 };
@@ -34,5 +42,8 @@ const styles = StyleSheet.create({
     },
     image: {
         flex: 1,
+    },
+    LogoContainer: {
+        display: 'flex', alignItems: 'center', position: "absolute", width: WIDTH, top: 123,
     }
 });

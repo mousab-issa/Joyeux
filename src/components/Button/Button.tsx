@@ -8,15 +8,6 @@ import SvgIcon from '../SvgIcon/SvgIcon';
 import { theme } from 'src/common/theme/theme';
 
 
-interface ButtonProps {
-    onClick: () => any,
-    title: string,
-    iconOnly?: boolean;
-    icon?: string;
-    showIcon?: boolean;
-    disable?: boolean;
-}
-
 const ButtonStyled: FC<ButtonProps> = ({ onClick, title, iconOnly, icon, showIcon, disable }) => {
 
     const COLORS = !disable ? ['#F44E4E', '#F44E4E', '#FCAE27', '#FCAE27']
@@ -24,7 +15,7 @@ const ButtonStyled: FC<ButtonProps> = ({ onClick, title, iconOnly, icon, showIco
 
     const borderStyle = !disable ? {} : { borderWidth: 1, borderColor: theme.Colors.primary }
     return (
-        <Pressable onPress={onClick}>
+        <Pressable onPress={!disable ? onClick : null}>
             <LinearGradient
                 start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
                 colors={COLORS}

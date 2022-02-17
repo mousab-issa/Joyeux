@@ -2,21 +2,25 @@ import React, { useEffect } from 'react';
 import {
   StatusBar,
   useColorScheme,
-  Alert
+  Alert,
+  Platform
 } from 'react-native';
 
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import NetInfo from "@react-native-community/netinfo";
-
 import { Provider } from 'react-redux';
-import store from 'src/store/store';
 
 import Navigator from 'src/navigation/navigator';
+import store from 'src/store/store';
+
+import SystemNavigationBar from "react-native-system-navigation-bar";
+
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   useEffect(() => {
+    intitApp();
     const unsubscribe = NetInfo.addEventListener(state => {
       if (state.isConnected) {
       } else {
@@ -36,6 +40,12 @@ const App = () => {
     return unsubscribe;
   }, []);
 
+
+  const intitApp = () => {
+    if (Platform.OS === 'android') {
+      SystemNavigationBar.navigationHide();
+    }
+  }
 
   return (
 

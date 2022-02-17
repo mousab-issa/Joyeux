@@ -27,8 +27,11 @@ export const theme: themeType = {
       default: '#F44E4E',
       light: 'string',
     },
+    yellow: {
+      default: '#FAAE1D',
+    },
   },
-
+  // Typograhpy used throughout the App
   Fonts: {
     Main: {
       header1: {

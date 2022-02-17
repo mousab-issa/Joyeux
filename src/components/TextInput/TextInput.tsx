@@ -30,7 +30,7 @@ const TextInputStyled: FC<TextInputTypes> = ({ prefix, type, onChange, placeHold
                         {prefix}
                     </Text>
                 }
-                <TextInput placeholderTextColor={'white'} placeholder={placeHolder} onChange={onChange} keyboardType={type} style={styles.textInputSyle}> </TextInput>
+                <TextInput placeholderTextColor={'white'} placeholder={placeHolder} onChangeText={onChange} keyboardType={type} style={styles.textInputSyle}> </TextInput>
             </View>
         </View>
     )
@@ -43,28 +43,32 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: theme.Colors.primaryDark,
+        backgroundColor:'#02201B',
         borderRadius: Constants.ResponsiveSize.f10,
         borderWidth: Constants.ResponsiveSize.f1,
         borderColor: theme.Colors.primary,
-        height: Constants.ResponsiveSize.f50
+        height: Constants.ResponsiveSize.f70,
+        paddingHorizontal:Constants.ResponsiveSize.f28,
+        paddingVertical:Constants.ResponsiveSize.f5,
     },
     prefix: {
+        ...theme.Fonts.Main.header2,
         flex: 1,
         padding: Constants.ResponsiveSize.f10,
         color: theme.Colors.primary,
-        fontSize: Constants.ResponsiveSize.f16,
+
         fontWeight: 'bold',
     },
     textInputSyle: {
         flex: 4,
+        ...theme.Fonts.Main.header2,
         alignSelf: 'center',
-        color: theme.Colors.primary,
+        color: theme.Colors.white,
         fontSize: 16,
         fontWeight: 'bold',
         height: '100%',
         padding: 10,
-        
+
     },
     labelStyle: {
         marginBottom: 20
