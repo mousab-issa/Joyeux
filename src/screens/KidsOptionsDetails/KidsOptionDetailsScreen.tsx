@@ -7,6 +7,7 @@ import { AuthScreenContainer } from 'src/containers';
 
 
 const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
+    
     const [isSelected, setIsSelected] = useState([
         {
             id: 1,
@@ -18,7 +19,6 @@ const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
             id: 2,
             value: "No",
             label: "No",
-            selected: false,
         },
     ]);
 
@@ -37,7 +37,7 @@ const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
             {isSelected.map((item) => {
                 return (
                     <View key={item.value} style={{ marginVertical: 10 }} >
-                        <Button disable={!item.selected} onClick={() => onButtonSelected(item)} title={item.label} />
+                        <Button  onClick={() => onButtonSelected(item)} title={item.label} />
                     </View>
                 )
             })}

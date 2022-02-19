@@ -61,3 +61,11 @@ export const theme: themeType = {
     },
   },
 };
+export const MainGradient = ['#F44E4E', '#F44E4E', '#FCAE27', '#FCAE27'];
+
+export const SecondaryGradient = [
+  theme.Colors.primary,
+  theme.Colors.primary,
+  '#00897E',
+  '#00897E',
+];

@@ -107,7 +107,7 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
             </Pressable>
 
             <View style={styles.slectItemContainer}>
-                {!showEditingText ?
+                {true ?
                     <FlatList
                         listKey={'date-list'}
                         ref={flatListRef}
@@ -126,7 +126,8 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                         onLayout={onUpdateHeight}
                         showsVerticalScrollIndicator={false}
                         pagingEnabled
-                    /> :
+                    /> 
+                    :
                     <View style={styles.editingInputContainer}>
                         <RNTextInput
                             autoFocus
@@ -140,7 +141,7 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                         />
                     </View>
                 }
-            </View>
+            </View> 
             <Pressable onPress={onDownPressed} >
                 <SvgIcon
                     name='chevron-down'
@@ -152,6 +153,13 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
         </View>
     )
 }
+
+
+/*
+TODO: 
+Add logic to merge data from different pickers
+
+*/
 
 const DatePicker = () => {
     return (
@@ -171,7 +179,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        height: 30,
+        height:100,
         alignItems: 'center',
         marginHorizontal: 10
     },

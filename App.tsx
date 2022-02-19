@@ -14,6 +14,7 @@ import Navigator from 'src/navigation/navigator';
 import store from 'src/store/store';
 
 import SystemNavigationBar from "react-native-system-navigation-bar";
+import { theme } from 'src/common/theme/theme';
 
 
 const App = () => {
@@ -42,19 +43,21 @@ const App = () => {
 
 
   const intitApp = () => {
-    if (Platform.OS === 'android') {
-      SystemNavigationBar.navigationHide();
-    }
+    SystemNavigationBar.fullScreen(true);
+    SystemNavigationBar.immersive();
+
   }
 
   return (
-
-    <Provider store={store}>
-      <SafeAreaProvider>
-        <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-        <Navigator />
-      </SafeAreaProvider>
-    </Provider>
+    <>
+    <StatusBar backgroundColor={theme.Colors.active}/>
+      <Provider store={store}>
+        <SafeAreaProvider>
+          <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
+          <Navigator />
+        </SafeAreaProvider>
+      </Provider>
+    </>
   );
 };
 

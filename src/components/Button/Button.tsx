@@ -5,12 +5,12 @@ import LinearGradient from 'react-native-linear-gradient';
 import { CommonStyles } from 'src/common/styles';
 import Constants from 'src/common/constants';
 import SvgIcon from '../SvgIcon/SvgIcon';
-import { theme } from 'src/common/theme/theme';
+import { MainGradient, theme } from 'src/common/theme/theme';
 
 
 const ButtonStyled: FC<ButtonProps> = ({ onClick, title, iconOnly, icon, showIcon, disable }) => {
 
-    const COLORS = !disable ? ['#F44E4E', '#F44E4E', '#FCAE27', '#FCAE27']
+    const COLORS = !disable ? MainGradient
         : [`${theme.Colors.primaryDark}`, `${theme.Colors.primaryDark}`, `${theme.Colors.primaryDark}`, `${theme.Colors.primaryDark}`]
 
     const borderStyle = !disable ? {} : { borderWidth: 1, borderColor: theme.Colors.primary }

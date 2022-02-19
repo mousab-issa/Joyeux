@@ -7,6 +7,7 @@ import MartialStatusScreen from 'src/screens/MartialStatus/MartialStatusScreen';
 import { IS_IPHONE_X } from 'src/lib/helpers/utils';
 import { SvgIcon, TabBarAdvancedButton } from 'src/components';
 import { Text } from 'react-native-svg';
+import { theme } from 'src/common/theme/theme';
 
 const BottomBar = createBottomTabNavigator();
 
@@ -28,12 +29,10 @@ export const HomeTabs: React.FC<Props> = ({ barColor }) => (
                 )}
             </View>
         )}
-
         screenOptions={{
-
             headerShown: false,
             tabBarInactiveTintColor: 'white',
-            tabBarActiveTintColor: 'green',
+            tabBarActiveTintColor: theme.Colors.primaryDark,
             tabBarStyle: styles.navigator,
         }}
     >
@@ -43,7 +42,9 @@ export const HomeTabs: React.FC<Props> = ({ barColor }) => (
             options={{
                 tabBarIcon: ({ color }) => (
                     <SvgIcon
-                        name="chevron-right"
+                        name="home"
+                        height={20}
+                        width={20}
                     />
                 )
             }}
@@ -54,7 +55,9 @@ export const HomeTabs: React.FC<Props> = ({ barColor }) => (
             options={{
                 tabBarIcon: ({ color }) => (
                     <SvgIcon
-                        name="chevron-right"
+                        name="money-bag"
+                        height={20}
+                        width={20}
                     />
                 )
             }}
@@ -80,7 +83,9 @@ export const HomeTabs: React.FC<Props> = ({ barColor }) => (
             options={{
                 tabBarIcon: ({ color }) => (
                     <SvgIcon
-                        name="chevron-right"
+                        name="events"
+                        height={20}
+                        width={20}
                     />
                 )
             }}
@@ -91,7 +96,9 @@ export const HomeTabs: React.FC<Props> = ({ barColor }) => (
             options={{
                 tabBarIcon: ({ color }) => (
                     <SvgIcon
-                        name="chevron-right"
+                        height={20}
+                        width={20}
+                        name="memories"
                     />
                 )
             }}
