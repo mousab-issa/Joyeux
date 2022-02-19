@@ -18,7 +18,7 @@ const TextInputStyled: FC<TextInputTypes> = ({ prefix, type, onChange, placeHold
                 label &&
                 <View style={styles.labelStyle}>
                     <Text style={{
-                        color: 'white',
+                        color: theme.Colors.primary,
                         fontWeight: "bold",
                         fontSize: Constants.ResponsiveSize.f16,
                     }}>{label}</Text>
@@ -43,10 +43,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor:'#02201B',
+        backgroundColor:theme.Colors.primaryLight,
         borderRadius: Constants.ResponsiveSize.f10,
         borderWidth: Constants.ResponsiveSize.f1,
-        borderColor: theme.Colors.primary,
+        borderColor: '#EAF4F3',
         height: Constants.ResponsiveSize.f70,
         paddingHorizontal:Constants.ResponsiveSize.f28,
         paddingVertical:Constants.ResponsiveSize.f5,
@@ -55,15 +55,14 @@ const styles = StyleSheet.create({
         ...theme.Fonts.Main.header2,
         flex: 1,
         padding: Constants.ResponsiveSize.f10,
-        color: theme.Colors.primary,
-
+        color: theme.Colors.primaryDark,
         fontWeight: 'bold',
     },
     textInputSyle: {
         flex: 4,
         ...theme.Fonts.Main.header2,
         alignSelf: 'center',
-        color: theme.Colors.white,
+        color: theme.Colors.primary,
         fontSize: 16,
         fontWeight: 'bold',
         height: '100%',

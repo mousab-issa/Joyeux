@@ -86,6 +86,7 @@ const Constants = {
     f100: RFValue(100, DeviceHeightAid),
     f120: RFValue(120, DeviceHeightAid),
     f130: RFValue(130, DeviceHeightAid),
+    f195: RFValue(195, DeviceHeightAid),
     screenHeight: HEIGHT,
     screenWidth: WIDTH,
   },

@@ -8,6 +8,7 @@ export const theme: themeType = {
     primaryDark: '#011511',
     primaryLight: '#CDE8E6',
     secondary: '#40968D',
+    secondaryLight:'#457C78',
     inactive: '#FFFFFF',
     active: '#6DBE4B',
     error: '#F0385E',

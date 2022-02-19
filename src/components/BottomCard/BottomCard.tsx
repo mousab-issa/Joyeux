@@ -70,11 +70,10 @@ const styles = StyleSheet.create({
         paddingHorizontal: Constants.ResponsiveSize.f16,
     },
     bottomSheet: {
-
         width: '100%',
         maxHeight: HEIGHT / 1.5,
         minHeight: HEIGHT / 3,
-        backgroundColor: isDark ? theme.Colors.primaryDark : theme.Colors.primaryDark,
+        backgroundColor: 'rgba(255, 255, 266, 0.1)',
         borderTopStartRadius: Constants.ResponsiveSize.f20,
         borderTopEndRadius: Constants.ResponsiveSize.f20,
         padding: Constants.ResponsiveSize.f30,

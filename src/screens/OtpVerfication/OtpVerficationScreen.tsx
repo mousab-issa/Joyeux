@@ -14,12 +14,13 @@ import {
 } from 'react-native';
 import RNOtpVerify from 'react-native-otp-verify';
 
-import { BottomCardContainer, SvgIcon } from 'src/components';
+import { BottomCardContainer, ContentWrapper, SvgIcon } from 'src/components';
 import { AuthScreenContainer } from 'src/containers';
 
 import OTPInputView from 'src/components/OTPINPUT';
 import { theme } from 'src/common/theme/theme';
 import Constants from 'src/common/constants';
+import { CommonStyles } from 'src/common/styles';
 
 let totalTime = 60;
 
@@ -133,26 +134,34 @@ const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation,
                 subTitleComp={<PhoneEditingComp phoneNumber={phoneNumber} onEdit={() => {
                     console.log('Hello')
                 }} />}>
-                <Text style={{ color: "white", fontWeight: 'bold', fontSize: 16 }} onPress={onOTPCOdeFilled}> Enter OTP</Text>
-                <View style={styles.bottomSheetContentContainer}>
-                    <OTPInputView
-                        style={{ width: "95%" }}
-                        ref={OtpRef}
-                        pinCount={5}
-                        code={otpCode}
 
-                        placeholderCharacter="0"
-                        placeholderTextColor={'#A09A9A'}
-                        codeInputFieldStyle={styles.otpInput}
-                        onCodeChanged={(code) => {
-                            onOTPCodeChanged(code);
-                        }}
-                        onCodeFilled={(code) => {
-                            onOTPCOdeFilled(code);
-                        }}
-                    />
+                <View style={styles.bottomSheetContentContainer}>
+                    <ContentWrapper>
+                        <Text
+                            style={{
+                                color: theme.Colors.secondaryLight,
+                                fontWeight: 'bold',
+                                fontSize: 16,
+                            }}>Mobile Number
+                        </Text>
+                        <OTPInputView
+                            style={{ width: "95%" }}
+                            ref={OtpRef}
+                            pinCount={5}
+                            code={otpCode}
+                            placeholderCharacter=""
+                            placeholderTextColor={'#A09A9A'}
+                            codeInputFieldStyle={styles.otpInput}
+                            onCodeChanged={(code) => {
+                                onOTPCodeChanged(code);
+                            }}
+                            onCodeFilled={(code) => {
+                                onOTPCOdeFilled(code);
+                            }}
+                        />
+                    </ContentWrapper>
                 </View>
-                <View style={styles.centerRow}>
+                <View style={[styles.centerRow, { marginBottom: 10 }]}>
                     <Text style={{ color: 'white', marginHorizontal: 15 }}>
                         Reading OTP
                     </Text>
@@ -162,7 +171,7 @@ const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation,
                 </View>
                 <TouchableOpacity style={styles.centerRow} onPress={onResendCode}>
                     <SvgIcon name='chat' height={Constants.ResponsiveSize.f26} width={Constants.ResponsiveSize.f26} />
-                    <Text style={{ color: 'white', marginHorizontal: 15 }}>
+                    <Text style={{ color: theme.Colors.primary,fontWeight:'bold', marginHorizontal: 15 }}>
                         Resend SMS
                     </Text>
                 </TouchableOpacity>
@@ -175,7 +184,7 @@ export default OtpVerficationScreen;
 
 const styles = StyleSheet.create({
     bottomSheetContentContainer: {
-        flex: 1,
+        flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -184,13 +193,15 @@ const styles = StyleSheet.create({
     },
     otpInput: {
         ...theme.Fonts.Main.header1,
-        backgroundColor: '#02201B',
+        backgroundColor: theme.Colors.primaryLight,
         borderColor: theme.Colors.primary,
         borderWidth: .2,
-        color: 'white',
+        color: theme.Colors.primary,
         height: Constants.ResponsiveSize.f70,
         width: Constants.ResponsiveSize.f70,
-        borderRadius: 5
+        borderRadius: 5,
+        ...CommonStyles.boxShadow,
+        shadowColor: '#CECECEA2',
     },
     textStyle: {
         fontSize: Constants.ResponsiveSize.f15,

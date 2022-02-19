@@ -17,6 +17,7 @@ interface ColorsType {
   primaryDark: string;
   primaryLight: string;
   secondary: string;
+  secondaryLight:string;
   error: string;
   borders: string;
   active: string;
