@@ -51,6 +51,7 @@ const AuthStack = () => {
             <Stack.Screen name="SpouseAgeDetails" component={SpouseAgeDetailsScreen} options={{ headerShown: false }} />
             <Stack.Screen name="KidsOptionDetails" component={KidsOptionDetailsScreen} options={{ headerShown: false }} />
             <Stack.Screen name="AddKids" component={AddKidsScreen} options={{ headerShown: false }} />
+            {/* Testing Screen move it to home stack later on */}
             <Stack.Screen name="MartialStatus" component={HomeTabs} options={{ headerShown: false }} />
         </Stack.Navigator>
     );

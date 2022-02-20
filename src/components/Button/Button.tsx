@@ -5,15 +5,17 @@ import LinearGradient from 'react-native-linear-gradient';
 import { CommonStyles } from 'src/common/styles';
 import Constants from 'src/common/constants';
 import SvgIcon from '../SvgIcon/SvgIcon';
-import { theme } from 'src/common/theme/theme';
+import { MainGradient, theme } from 'src/common/theme/theme';
 
 
-const ButtonStyled: FC<ButtonProps> = ({ onClick, title, iconOnly, icon, showIcon, disable }) => {
+const ButtonStyled: FC<ButtonProps> = ({ onClick, title, iconOnly, icon, showIcon, disable, disableStyle }) => {
 
-    const COLORS = !disable ? ['#F44E4E', '#F44E4E', '#FCAE27', '#FCAE27']
-        : [`${theme.Colors.primaryDark}`, `${theme.Colors.primaryDark}`, `${theme.Colors.primaryDark}`, `${theme.Colors.primaryDark}`]
+    const COLORS = !disable && !disableStyle ? MainGradient
+        : ['white', 'white', 'white', 'white']
 
-    const borderStyle = !disable ? {} : { borderWidth: 1, borderColor: theme.Colors.primary }
+    const borderStyle = !disable ? {} : { borderWidth: 1, borderColor: 'white' }
+    const TextColor = !disable && !disableStyle ? 'white'
+        : 'black'
     return (
         <Pressable onPress={!disable ? onClick : null}>
             <LinearGradient
@@ -32,7 +34,7 @@ const ButtonStyled: FC<ButtonProps> = ({ onClick, title, iconOnly, icon, showIco
 
                         }
                         <View style={{ flex: 1, alignItems: 'center' }}>
-                            <Text style={{ ...CommonStyles.boxShadow, color: 'white', fontSize: 24, fontWeight: 'bold' }}>
+                            <Text style={{ color: TextColor, fontSize: 24, fontWeight: 'bold' }}>
                                 {title}
                             </Text>
                         </View>
@@ -55,6 +57,8 @@ const styles = StyleSheet.create({
         width: '100%',
         backgroundColor: "green",
         paddingVertical: 15,
+        borderColor: 'white',
+        borderWidth: 1,
         borderRadius: Constants.ResponsiveSize.f50
     },
 })

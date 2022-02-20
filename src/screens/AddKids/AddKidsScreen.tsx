@@ -3,17 +3,14 @@
 
 import React, { FC, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { Pressable, StyleSheet, Text, View, ScrollView, Dimensions, KeyboardAvoidingView, FlatList } from 'react-native'
+import { Pressable, StyleSheet, View, Text } from 'react-native'
 import { theme } from 'src/common/theme/theme';
 
-import { Button, DatePicker, SvgIcon, TextInput } from 'src/components';
+import { BottomCardContainer, Button, DatePicker, SvgIcon, TextInput } from 'src/components';
 import { AuthScreenContainer } from 'src/containers';
 
-import { VirtualizedList } from 'src/components';
-import { CommonStyles } from 'src/common/styles';
-import { WIDTH } from 'src/common/constants';
+import Constants, { HEIGHT, WIDTH } from 'src/common/constants';
 
-const windowHeight = Dimensions.get('window').height;
 
 const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
     const [isSelected, setIsSelected] = useState([
@@ -22,12 +19,14 @@ const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
             value: "Male",
             label: "Male",
             selected: true,
+            icon: 'baby-male'
         },
         {
             id: 2,
             value: "Female",
             label: "Female",
             selected: false,
+            icon: 'baby-female'
         },
     ]);
 
@@ -56,7 +55,7 @@ const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
                             alignItems: 'center'
 
                         }}>
-                            <SvgIcon color={item.selected ? 'orange' : 'black'} name='baby-female' height={30} width={30} />
+                            <SvgIcon color={item.selected ? 'orange' : 'white'} name={item.icon} height={30} width={30} />
                         </View>
                     </Pressable>
                 )
@@ -74,45 +73,23 @@ const DetailsCard = () => {
             <View style={{ marginBottom: 20 }}>
                 <Select onSelectAction={() => console.log('')} />
             </View>
-            <View style={{ marginBottom: 20 }}>
+            <View style={{ marginVertical: 20 }}>
                 <DatePicker />
             </View>
-            {/* <View style={{ borderWidth: 1, borderColor: theme.Colors.primary }} /> */}
+            <View
+                style={{
+                    borderWidth: 1,
+                    borderColor: theme.Colors.primary,
+                    marginVertical: Constants.ResponsiveSize.f30
+                }}
+            />
         </>
     )
 }
 
-
-
-const BottomCardContainer: FC<BottomCardTypes> = ({ children, title, subTitle, fixedHeight }) => {
-    const cardTitle = title ? title : "";
-    const cardSubtitle = subTitle ? subTitle : '';
-
-
-    return (
-        <View style={styles.container}>
-            <View style={{ marginHorizontal: 25, marginVertical: 40, alignSelf: 'flex-start' }}>
-                <Text style={{ fontSize: 32, color: 'white', fontWeight: 'bold', marginVertical: 10 }}>{cardTitle}</Text>
-                <Text style={{ fontSize: 16, color: 'white' }}>{cardSubtitle} </Text>
-            </View>
-
-            <KeyboardAvoidingView style={[styles.bottomSheet, { ...CommonStyles.boxShadow, }]}>
-                {fixedHeight ?
-                    <View style={styles.bottomSheetContent}>
-                        {children}
-                    </View> :
-                    <ScrollView contentContainerStyle={styles.bottomSheetContent} >
-                        {children}
-                    </ScrollView>
-                }
-            </KeyboardAvoidingView>
-        </View>
-    )
-}
-
-
-
 const AddKidsScreen: FC<{ navigation: any }> = ({ navigation }) => {
+    const [KidsArray, setKidsArray] = useState<number[]>([1]);
+
     const { control, register } = useForm({
         defaultValues: { kids: [{}] }
     });
@@ -122,15 +99,37 @@ const AddKidsScreen: FC<{ navigation: any }> = ({ navigation }) => {
 
     });
 
+    const addKid = () => {
+        const newElement = 1
+        setKidsArray(oldArray => [...oldArray, newElement]);
+    }
+
     return (
         <AuthScreenContainer>
-            <BottomCardContainer fixedHeight title='Do you kids ?' subTitle='We have a surprise gift for your kids'>
-                <View style={styles.row}>
-                    <DetailsCard />
-                </View>
-
+            <BottomCardContainer title='Do you kids ?' subTitle='We have a surprise gift for your kids'>
+                {
+                    KidsArray.map((nKid, index) => {
+                        return (
+                            <View key={index} style={styles.row}>
+                                <DetailsCard />
+                            </View>
+                        )
+                    })
+                }
                 <View style={styles.bottomSheetContentContainer}>
-                    <Button iconOnly icon='chevron-right' title='' onClick={() => navigation.navigate('MartialStatus')} />
+                    <Pressable
+                        onPress={addKid}
+                        style={{
+                            flex: 1,
+                            flexDirection: 'row',
+                            alignItems: "center"
+                        }}>
+                        <SvgIcon name="add-kid" height={30} width={30} />
+                        <Text style={{ color: "white", marginLeft: 16, fontWeight: "bold" }}>add kid</Text>
+                    </Pressable>
+                    <View style={{ flex: 1, }}>
+                        <Button iconOnly icon='chevron-right' title='' onClick={() => navigation.navigate('MartialStatus')} />
+                    </View>
                 </View>
 
             </BottomCardContainer>
@@ -139,9 +138,11 @@ const AddKidsScreen: FC<{ navigation: any }> = ({ navigation }) => {
 };
 
 const styles = StyleSheet.create({
+
     bottomSheetContentContainer: {
-        // flex: 1,
-        justifyContent: 'center'
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     row: {
         flex: 1
@@ -156,8 +157,8 @@ const styles = StyleSheet.create({
     },
     bottomSheet: {
         width: '100%',
-        maxHeight: windowHeight / 1.5,
-        minHeight: windowHeight / 2.8,
+        maxHeight: HEIGHT / 1.5,
+        minHeight: HEIGHT / 2.8,
         backgroundColor: theme.Colors.primaryDark,
         borderTopStartRadius: 20,
         borderTopEndRadius: 20,
@@ -169,4 +170,7 @@ const styles = StyleSheet.create({
 
 })
 export default AddKidsScreen;
+
+
+
 

@@ -1,6 +1,7 @@
 import React, { FC, useState, useEffect, useRef, useMemo, memo, } from 'react';
 import { Text, View, LayoutChangeEvent, FlatList, Pressable, TextInput as RNTextInput, StyleSheet } from 'react-native';
 import Constants from 'src/common/constants';
+import { CommonStyles } from 'src/common/styles';
 import { theme } from 'src/common/theme/theme';
 
 import { SvgIcon, } from 'src/components';
@@ -102,12 +103,12 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                     name='chevron-up'
                     height={Constants.ResponsiveSize.f30}
                     width={Constants.ResponsiveSize.f30}
-                    color={!enableTopButton ? 'grey' : theme.Colors.primary}
+                    color={!enableTopButton ? 'grey' : theme.Colors.primaryLight}
                 />
             </Pressable>
 
             <View style={styles.slectItemContainer}>
-                {!showEditingText ?
+                {true ?
                     <FlatList
                         listKey={'date-list'}
                         ref={flatListRef}
@@ -126,7 +127,8 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                         onLayout={onUpdateHeight}
                         showsVerticalScrollIndicator={false}
                         pagingEnabled
-                    /> :
+                    /> 
+                    :
                     <View style={styles.editingInputContainer}>
                         <RNTextInput
                             autoFocus
@@ -140,18 +142,25 @@ const DatePickerSelectItem: FC<{ data: any[], disableScroll?: boolean }> = ({ da
                         />
                     </View>
                 }
-            </View>
+            </View> 
             <Pressable onPress={onDownPressed} >
                 <SvgIcon
                     name='chevron-down'
                     height={Constants.ResponsiveSize.f30}
                     width={Constants.ResponsiveSize.f30}
-                    color={!enableBottomButton ? 'grey' : theme.Colors.primary}
+                    color={!enableBottomButton ? 'grey' : theme.Colors.primaryLight}
                 />
             </Pressable>
         </View>
     )
 }
+
+
+/*
+TODO: 
+Add logic to merge data from different pickers
+
+*/
 
 const DatePicker = () => {
     return (
@@ -171,7 +180,7 @@ const styles = StyleSheet.create({
     },
     container: {
         flex: 1,
-        height: 30,
+        height:100,
         alignItems: 'center',
         marginHorizontal: 10
     },
@@ -179,10 +188,12 @@ const styles = StyleSheet.create({
         minHeight: 60,
         flex: 1,
         width: '100%',
-        backgroundColor: '#02201B',
+        backgroundColor: theme.Colors.primaryLight,
         borderColor: theme.Colors.primary,
         borderWidth: 1,
         borderRadius: 5,
+        ...CommonStyles.boxShadow,
+        shadowColor:theme.Colors.primaryLight
     },
     editingInputContainer: {
         flex: 1,
@@ -191,7 +202,7 @@ const styles = StyleSheet.create({
 
     },
     textStyle: {
-        color: 'white',
+        color:theme.Colors.primary,
         fontSize: Constants.ResponsiveSize.f30,
         fontWeight: 'bold',
     }

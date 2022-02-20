@@ -1,9 +1,11 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
+import { Pressable, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, View } from 'react-native';
 import { BottomTabBarButtonProps } from '@react-navigation/bottom-tabs/lib/typescript/src/types';
 import SvgIcon from '../SvgIcon/SvgIcon';
 import { Text } from 'react-native-svg';
 import Svg, { Path, SvgProps } from "react-native-svg";
+import LinearGradient from 'react-native-linear-gradient';
+import { MainGradient } from 'src/common/theme/theme';
 
 type Props = BottomTabBarButtonProps & {
     bgColor?: string;
@@ -33,6 +35,7 @@ export const TabBg: React.FC<Propss> = ({
     )
 };
 
+
 const TabBarAdvancedButton: React.FC<Props> = ({
     bgColor,
     ...props
@@ -45,17 +48,21 @@ const TabBarAdvancedButton: React.FC<Props> = ({
             color={'transparent'}
             style={styles.background}
         />
-        
-
-        <TouchableOpacity
-            style={styles.button}
+        <Pressable
             onPress={props.onPress}
         >
-            <SvgIcon
-                name="chevron-right"
-
-            />
-        </TouchableOpacity>
+            <LinearGradient
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.button}
+                colors={MainGradient}>
+                <SvgIcon
+                    name="gift"
+                    height={40}
+                    width={40}
+                />
+            </LinearGradient>
+        </Pressable>
     </View>
 );
 

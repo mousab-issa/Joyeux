@@ -6,3 +6,4 @@ export {default as SvgIcon} from './SvgIcon/SvgIcon';
 export {default as DatePicker} from './DatePicker/DatePicker';
 export {default as VirtualizedList} from './VirtualizedList/VirtualizedList';
 export {default as TabBarAdvancedButton} from './TabBarAdvancedButton/TabBarAdvancedButton';
+export {default as ContentWrapper} from './BottomCard/ContentWrapper/ContentWrapper';
