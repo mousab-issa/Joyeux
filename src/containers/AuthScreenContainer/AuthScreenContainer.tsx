@@ -7,7 +7,6 @@ import { SvgIcon } from 'src/components';
 import BackgroundImage from 'src/lib/assets/Svg/BackGround.svg';
 import Logo from 'src/lib/assets/Svg/WordMark.svg';
 
-
 const AuthScreenContainer: FC<{ onClick?: () => any, showBackBtm?: boolean }> = ({ children, onClick, showBackBtm }) => {
     return (
         <View style={styles.container}>
@@ -20,7 +19,11 @@ const AuthScreenContainer: FC<{ onClick?: () => any, showBackBtm?: boolean }> = 
             <SafeAreaView style={styles.container}>
                 {
                     showBackBtm &&
-                    <Pressable style={{ alignItems: 'flex-start', left: 20, position: 'relative' }} onPress={onClick}>
+                    <Pressable
+                        style={{
+                            alignItems: 'flex-start',
+                            left: 20,
+                        }} onPress={onClick}>
                         <SvgIcon
                             height={20}
                             width={20}
@@ -44,6 +47,9 @@ const styles = StyleSheet.create({
         flex: 1,
     },
     LogoContainer: {
-        display: 'flex', alignItems: 'center', position: "absolute", width: WIDTH, top: 123,
+        display: 'flex',
+        alignItems: 'center',
+        position: "absolute",
+        width: WIDTH, top: 123,
     }
 });

@@ -35,7 +35,7 @@ const AuthStack = () => {
 
     return (
         <Stack.Navigator
-            initialRouteName="PhoneNumber"
+            initialRouteName="AddKids"
             screenOptions={{
                 headerShown: false,
                 animation: 'slide_from_right'

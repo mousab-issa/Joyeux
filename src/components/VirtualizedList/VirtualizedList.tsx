@@ -1,6 +1,5 @@
 import React, { FC } from "react"
-import { FlatList, View } from "react-native"
-
+import { FlatList } from "react-native"
 
 const VirtualizedList: FC = ({ children }) => {
     return (

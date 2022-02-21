@@ -15,6 +15,7 @@ import store from 'src/store/store';
 
 import SystemNavigationBar from "react-native-system-navigation-bar";
 import { theme } from 'src/common/theme/theme';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 
 const App = () => {
