@@ -9,6 +9,6 @@ export const CommonStyles = StyleSheet.create({
     },
     shadowOpacity: 1,
     shadowRadius: 2.22,
-    elevation: 12,
+    elevation: 3,
   },
 });

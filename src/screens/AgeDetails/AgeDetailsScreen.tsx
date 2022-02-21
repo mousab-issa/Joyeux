@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, useState } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { theme } from 'src/common/theme/theme';
 
@@ -7,6 +7,9 @@ import { AuthScreenContainer } from 'src/containers';
 
 
 const AgeDetailsScreen: FC<{ navigation: any }> = ({ navigation }) => {
+    const [date, setDate] = useState();
+
+
     return (
         <AuthScreenContainer>
             <BottomCardContainer title='What is Your age' subTitle='Please Enter DOB' fixedHeight>
@@ -19,7 +22,14 @@ const AgeDetailsScreen: FC<{ navigation: any }> = ({ navigation }) => {
                         }}>Mobile Number
                     </Text>
                     <View style={styles.bottomSheetContentContainer}>
-                        <DatePicker />
+                        <DatePicker
+                            height={150}
+                            value={date}
+                            onChange={(value: any) => setDate(value)}
+                            format="yyyy-mm-dd"
+                            startYear={1950}
+                            endYear={2022}
+                        />
                     </View>
                     <View style={{ flex: 1 }} />
                 </ContentWrapper>

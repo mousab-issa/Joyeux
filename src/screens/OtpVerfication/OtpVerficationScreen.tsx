@@ -126,8 +126,12 @@ const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation,
         setOtpCode(code)
     };
 
+    const onGoback=()=>{
+        navigation.goBack();
+    }
+
     return (
-        <AuthScreenContainer showBackBtm>
+        <AuthScreenContainer showBackBtm onClick={onGoback}>
             <BottomCardContainer
                 title='Verify Otp'
                 subTitle=''

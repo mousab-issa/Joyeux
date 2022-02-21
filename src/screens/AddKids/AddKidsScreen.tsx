@@ -65,6 +65,8 @@ const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
 }
 
 const DetailsCard = () => {
+    const [date, setDate] = useState();
+
     return (
         <>
             <View style={{ marginBottom: 20 }}>
@@ -74,7 +76,14 @@ const DetailsCard = () => {
                 <Select onSelectAction={() => console.log('')} />
             </View>
             <View style={{ marginVertical: 20 }}>
-                <DatePicker />
+                <DatePicker
+                    height={150}
+                    value={date}
+                    onChange={(value: any) => setDate(value)}
+                    format="yyyy-mm-dd"
+                    startYear={1950}
+                    endYear={2022}
+                />
             </View>
             <View
                 style={{

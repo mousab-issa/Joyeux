@@ -4,16 +4,12 @@ import {
     Appearance,
     View,
     ScrollView,
-    Dimensions,
     KeyboardAvoidingView,
     Platform,
-    FlatList,
 } from 'react-native'
 
 import React, { FC } from 'react';
 
-import { CommonStyles } from 'src/common/styles';
-import { theme } from 'src/common/theme/theme';
 import Constants, { HEIGHT, WIDTH } from 'src/common/constants';
 
 const colorScheme = Appearance.getColorScheme();
@@ -22,7 +18,6 @@ const isDark = colorScheme === 'dark';
 const BottomCardContainer: FC<BottomCardTypes> = ({ children, title, subTitle, fixedHeight, subTitleComp }) => {
     const cardTitle = title ? title : "";
     const cardSubtitle = subTitle ? subTitle : '';
-
 
     return (
         <View style={{
@@ -35,12 +30,14 @@ const BottomCardContainer: FC<BottomCardTypes> = ({ children, title, subTitle, f
                 needsOffscreenAlphaCompositing
                 style={styles.container}
                 behavior={Platform.OS === "ios" ? "padding" : "height"}
-
             >
-                <View style={{ marginHorizontal: 25, marginVertical: 40, alignSelf: 'flex-start' }}>
-                    <Text style={{ fontSize: 32, color: 'white', fontWeight: 'bold', marginVertical: 10 }}>{cardTitle}</Text>
+                <View style={styles.bottomSheetTextContainer}>
+                    <Text style={styles.bottomSheetTitle}>{cardTitle}</Text>
                     {
-                        subTitleComp ? subTitleComp : <Text style={{ fontSize: 16, color: 'white' }}>{cardSubtitle} </Text>
+                        subTitleComp ? subTitleComp : <Text style={{
+                            fontSize: 16,
+                            color: 'white'
+                        }}>{cardSubtitle} </Text>
                     }
                 </View>
                 <View
@@ -49,7 +46,10 @@ const BottomCardContainer: FC<BottomCardTypes> = ({ children, title, subTitle, f
                         <View style={styles.bottomSheetContent}>
                             {children}
                         </View> :
-                        <ScrollView contentContainerStyle={styles.bottomSheetContent} showsVerticalScrollIndicator={false}>
+                        <ScrollView
+                            contentContainerStyle={styles.bottomSheetContent}
+                            showsVerticalScrollIndicator={false}
+                            nestedScrollEnabled={true}>
                             {children}
                         </ScrollView>
                     }
@@ -77,12 +77,21 @@ const styles = StyleSheet.create({
         borderTopStartRadius: Constants.ResponsiveSize.f20,
         borderTopEndRadius: Constants.ResponsiveSize.f20,
         padding: Constants.ResponsiveSize.f30,
-        ...CommonStyles.boxShadow
+    },
+    bottomSheetTextContainer: {
+        marginHorizontal: 25,
+        marginVertical: 40,
+        alignSelf: 'flex-start'
+    },
+    bottomSheetTitle: {
+        fontSize: 32,
+        color: 'white',
+        fontWeight: 'bold',
+        marginVertical: 10
     },
     bottomSheetContent: {
         flexGrow: 1
     },
-
     containerr: {
         flex: 1
     },

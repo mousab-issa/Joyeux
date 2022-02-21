@@ -16,6 +16,7 @@ type Props = {
 };
 
 export const HomeTabs: React.FC<Props> = ({ barColor }) => (
+
     <BottomBar.Navigator
         tabBar={(props) => (
             <View style={styles.navigatorContainer}>
