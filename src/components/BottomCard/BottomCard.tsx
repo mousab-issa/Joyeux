@@ -49,7 +49,7 @@ const BottomCardContainer: FC<BottomCardTypes> = ({ children, title, subTitle, f
                         <ScrollView
                             contentContainerStyle={styles.bottomSheetContent}
                             showsVerticalScrollIndicator={false}
-                            nestedScrollEnabled={true}>
+                            >
                             {children}
                         </ScrollView>
                     }

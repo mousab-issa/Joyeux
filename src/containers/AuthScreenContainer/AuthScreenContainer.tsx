@@ -1,21 +1,29 @@
 import React, { FC } from 'react';
 import { StyleSheet, View, Pressable } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import Constants, { WIDTH } from 'src/common/constants';
+import Constants, { HEIGHT, WIDTH } from 'src/common/constants';
 import { SvgIcon } from 'src/components';
 
 import BackgroundImage from 'src/lib/assets/Svg/BackGround.svg';
 import Logo from 'src/lib/assets/Svg/WordMark.svg';
+import LogoImage from 'src/lib/assets/Svg/Logo.svg';
 
-const AuthScreenContainer: FC<{ onClick?: () => any, showBackBtm?: boolean }> = ({ children, onClick, showBackBtm }) => {
+const AuthScreenContainer: FC<{ onClick?: () => any, showBackBtm?: boolean, showLogo?: boolean }> = ({ children, onClick, showBackBtm, showLogo = true }) => {
     return (
         <View style={styles.container}>
             <View style={{ position: 'absolute' }}>
                 <BackgroundImage />
             </View>
-            <View style={styles.LogoContainer}>
-                <Logo height={Constants.ResponsiveSize.f130} />
+            <View style={{ position: 'absolute', right: -50, opacity: .03 }}>
+                <LogoImage height={HEIGHT - 20} width={WIDTH - 120} color='grey' />
             </View>
+            {
+                showLogo && (
+                    <View style={styles.LogoContainer}>
+                        <Logo height={Constants.ResponsiveSize.f130} />
+                    </View>
+                )
+            }
             <SafeAreaView style={styles.container}>
                 {
                     showBackBtm &&

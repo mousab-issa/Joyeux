@@ -20,10 +20,9 @@ const styles = StyleSheet.create({
         shadowColor: '#CDE8E6',
         display: 'flex',
         backgroundColor: "white",
-        padding: 30,
+        paddingHorizontal: Constants.ResponsiveSize.f31,
+        paddingVertical: Constants.ResponsiveSize.f23,
         marginBottom: 65,
         borderRadius: 20,
-        minHeight: 195,
-        maxHeight: 200
     }
 })

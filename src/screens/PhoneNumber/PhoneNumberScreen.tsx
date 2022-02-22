@@ -19,19 +19,14 @@ const PhoneNumberScreen: FC<{ navigation: any }> = ({ navigation }) => {
 
     return (
         <AuthScreenContainer onClick={() => console.log('Hello')}>
-            <BottomCardContainer title='Login' subTitle='Enter valid mobile number , we will send you Otp Verfication'>
+            <BottomCardContainer title='login' subTitle='Enter valid mobile number , we will send you Otp Verfication'>
                 <View style={styles.bottomSheetContentContainer}>
                     <ContentWrapper>
                         <View style={styles.row}>
                             <Text
-                                style={{
-                                    color: theme.Colors.secondaryLight,
-                                    fontWeight: 'bold',
-                                    fontSize: 16,
-                                    marginBottom: 28
-                                }}>Mobile Number</Text>
+                                style={styles.title}>mobile Number</Text>
                         </View>
-                        <View style={styles.row}>
+                        <View style={[styles.row, { marginBottom: Constants.ResponsiveSize.f23 }]}>
                             <TextInput onChange={onEditingPhone} prefix={'+91'} type='numeric' />
                         </View>
                     </ContentWrapper>
@@ -47,6 +42,11 @@ const PhoneNumberScreen: FC<{ navigation: any }> = ({ navigation }) => {
 const styles = StyleSheet.create({
     bottomSheetContentContainer: {
         flex: 1
+    },
+    title: {
+        color: theme.Colors.secondaryLight,
+        ...theme.Fonts.Main.header2,
+        marginBottom: 28
     },
     row: {
         flex: 1

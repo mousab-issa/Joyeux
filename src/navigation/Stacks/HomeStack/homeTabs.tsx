@@ -8,6 +8,7 @@ import { IS_IPHONE_X } from 'src/lib/helpers/utils';
 import { SvgIcon, TabBarAdvancedButton } from 'src/components';
 import { Text } from 'react-native-svg';
 import { theme } from 'src/common/theme/theme';
+import { HEIGHT } from 'src/common/constants';
 
 const BottomBar = createBottomTabNavigator();
 
@@ -18,6 +19,7 @@ type Props = {
 export const HomeTabs: React.FC<Props> = ({ barColor }) => (
 
     <BottomBar.Navigator
+
         tabBar={(props) => (
             <View style={styles.navigatorContainer}>
                 <BottomTabBar
@@ -126,11 +128,15 @@ const styles = StyleSheet.create({
         shadowRadius: 2.22,
     },
     navigator: {
+        height: 80,
         borderTopWidth: 0,
         borderTopRightRadius: 50,
         borderTopLeftRadius: 50,
+        borderBottomRightRadius: 30,
+        borderBottomLeftRadius: 30,
         backgroundColor: '#1B9386',
-        elevation: 30
+        elevation: 1,
+        marginHorizontal:20
     },
     xFillLine: {
         position: 'absolute',

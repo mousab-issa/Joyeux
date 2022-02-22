@@ -19,18 +19,17 @@ const AgeDetailsScreen: FC<{ navigation: any }> = ({ navigation }) => {
                             color: theme.Colors.secondaryLight,
                             fontWeight: 'bold',
                             fontSize: 16,
-                        }}>Mobile Number
+                            marginBottom: 30
+                        }}>Your birthday
                     </Text>
-                    <View style={styles.bottomSheetContentContainer}>
-                        <DatePicker
-                            height={150}
-                            value={date}
-                            onChange={(value: any) => setDate(value)}
-                            format="yyyy-mm-dd"
-                            startYear={1950}
-                            endYear={2022}
-                        />
-                    </View>
+                    <DatePicker
+                        height={150}
+                        value={date}
+                        onChange={(value: any) => setDate(value)}
+                        format="dd-mm-yyyy"
+                        startYear={1950}
+                        endYear={2022}
+                    />
                     <View style={{ flex: 1 }} />
                 </ContentWrapper>
                 <View style={{ width: '50%', alignSelf: 'center' }}>

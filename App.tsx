@@ -44,14 +44,11 @@ const App = () => {
 
 
   const intitApp = () => {
-    SystemNavigationBar.fullScreen(true);
-    SystemNavigationBar.immersive();
-
   }
 
   return (
     <>
-    <StatusBar backgroundColor={theme.Colors.active}/>
+      <StatusBar backgroundColor={theme.Colors.active} />
       <Provider store={store}>
         <SafeAreaProvider>
           <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />

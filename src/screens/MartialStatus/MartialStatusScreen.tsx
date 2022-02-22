@@ -23,7 +23,7 @@ const HomeIconCard: FC<{ title: string, desc: string, icon: string }> = ({ title
         <View style={[
             styles.commonCardSty, {
                 borderColor: 'white',
-                backgroundColor: '#10675F',
+                backgroundColor: 'white',
             }]}>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                 <SvgIcon
@@ -35,10 +35,10 @@ const HomeIconCard: FC<{ title: string, desc: string, icon: string }> = ({ title
             </View>
 
             <View style={{ flex: 2, padding: 20 }}>
-                <Text style={[styles.h2, { color: "#FFD317" }]}>
+                <Text style={[styles.h2, { color: theme.Colors.primary }]}>
                     {title}
                 </Text>
-                <Text style={[styles.p, { color: "white", fontWeight: 'bold' }]}>
+                <Text style={[styles.p, { color: 'black' }]}>
                     {desc}
                 </Text>
             </View>
@@ -148,7 +148,7 @@ const InvesmentCard: FC<any> = () => {
             style={{
                 height: 88,
                 width: 80,
-                backgroundColor: theme.Colors.primaryDark,
+                backgroundColor: 'white',
                 marginHorizontal: 10,
                 borderRadius: 20,
                 alignItems: "center",
@@ -163,7 +163,11 @@ const InvesmentCard: FC<any> = () => {
                 />
             </View>
             <View style={{ flex: 1 }}>
-                <Text style={[styles.p, { color: "white", fontWeight: "bold" }]}>Digital Gold</Text>
+                <Text style={[styles.p,
+                {
+                    color: theme.Colors.primary,
+                    fontWeight: "bold"
+                }]}>Digital Gold</Text>
             </View>
 
         </View>
@@ -176,7 +180,7 @@ const HorizontalView = () => {
             style={[styles.commonCardSty, {
                 borderColor: theme.Colors.secondary,
                 alignItems: 'center',
-                backgroundColor: theme.Colors.secondary,
+                backgroundColor: 'white',
             }]}>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false} >
@@ -193,9 +197,8 @@ const InvesmentView = () => {
     return (
         <View
             style={[styles.commonCardSty, {
-                borderColor: theme.Colors.secondary,
+                borderColor: 'transparent',
                 alignItems: 'center',
-                backgroundColor: theme.Colors.secondary,
             }]}>
 
             <ScrollView horizontal showsHorizontalScrollIndicator={false} >
@@ -240,7 +243,7 @@ const MartialStatusScreen = () => {
                 <View style={styles.row}>
                     <View
                         style={[styles.commonCardSty, {
-                            backgroundColor: '#10675F',
+                            backgroundColor: 'white',
                             borderColor: theme.Colors.secondary,
                         }]}>
                         <LinearGradient
@@ -261,10 +264,10 @@ const MartialStatusScreen = () => {
                             />
                         </LinearGradient>
                         <View style={{ flex: 3, padding: 20 }}>
-                            <Text style={[styles.h2, { color: "#FFD317" }]}>
+                            <Text style={[styles.h2, { color: theme.Colors.primary }]}>
                                 Gift your Loved
                             </Text>
-                            <Text style={[styles.p, { color: "white", fontWeight: 'bold' }]}>
+                            <Text style={[styles.p, { color: "black", }]}>
                                 Bring smiles on your loved ones
                             </Text>
                         </View>
@@ -291,10 +294,6 @@ const MartialStatusScreen = () => {
                         </View>
 
                     </View>
-                </View>
-
-                <View style={{ padding: 20 }}>
-                    <Text style={[styles.h2, { color: 'white' }]}>Up coming Events</Text>
                 </View>
 
                 <View style={styles.row}>
@@ -408,7 +407,6 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 1,
         shadowRadius: 2.22,
-        elevation: 3,
     },
     commonCardSty: {
         minHeight: 100,

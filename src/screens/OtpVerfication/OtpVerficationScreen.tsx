@@ -126,7 +126,7 @@ const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation,
         setOtpCode(code)
     };
 
-    const onGoback=()=>{
+    const onGoback = () => {
         navigation.goBack();
     }
 
@@ -138,16 +138,18 @@ const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation,
                 subTitleComp={<PhoneEditingComp phoneNumber={phoneNumber} onEdit={() => {
                     console.log('Hello')
                 }} />}>
-
-                <View style={styles.bottomSheetContentContainer}>
-                    <ContentWrapper>
+                <ContentWrapper>
+                    <View style={{ flex: 1 }}>
                         <Text
                             style={{
                                 color: theme.Colors.secondaryLight,
                                 fontWeight: 'bold',
                                 fontSize: 16,
-                            }}>Mobile Number
+                                marginBottom: 20
+                            }}>enter OTP
                         </Text>
+                    </View>
+                    <View style={{ flex: 3, marginBottom: 20 }}>
                         <OTPInputView
                             style={{ width: "95%" }}
                             ref={OtpRef}
@@ -163,8 +165,8 @@ const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation,
                                 onOTPCOdeFilled(code);
                             }}
                         />
-                    </ContentWrapper>
-                </View>
+                    </View>
+                </ContentWrapper>
                 <View style={[styles.centerRow, { marginBottom: 10 }]}>
                     <Text style={{ color: 'white', marginHorizontal: 15 }}>
                         Reading OTP
@@ -175,7 +177,7 @@ const OtpVerficationScreen: FC<{ navigation: any, route: any }> = ({ navigation,
                 </View>
                 <TouchableOpacity style={styles.centerRow} onPress={onResendCode}>
                     <SvgIcon name='chat' height={Constants.ResponsiveSize.f26} width={Constants.ResponsiveSize.f26} />
-                    <Text style={{ color: theme.Colors.primary,fontWeight:'bold', marginHorizontal: 15 }}>
+                    <Text style={{ color: theme.Colors.primary, fontWeight: 'bold', marginHorizontal: 15 }}>
                         Resend SMS
                     </Text>
                 </TouchableOpacity>
@@ -191,6 +193,7 @@ const styles = StyleSheet.create({
         flexGrow: 1,
         justifyContent: 'center',
         alignItems: 'center'
+
     },
     row: {
         flex: 1

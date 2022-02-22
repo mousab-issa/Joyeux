@@ -18,7 +18,8 @@ const AnniversaryDetailsScreen: FC<{ navigation: any }> = ({ navigation }) => {
                         height={150}
                         value={date}
                         onChange={(value: any) => setDate(value)}
-                        format="yyyy-mm-dd"
+                                                format="dd-mm-yyyy"
+
                         startYear={1950}
                         endYear={2022}
                     />

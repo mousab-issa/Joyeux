@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity, TextInput } from "react-native";
+import { View, Text, ScrollView, StyleSheet, Dimensions, TouchableOpacity, TextInput, Pressable } from "react-native";
 
 import SvgIcon from "src/components/SvgIcon/SvgIcon";
 
@@ -62,7 +62,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
     }
 
     const getOrder = () => {
-        return (format || "dd-mm-yyyy").split("-").map((type, index) => {
+        return (format || "--mm-yyyy").split("-").map((type, index) => {
             switch (type) {
                 case "dd":
                     return { name: "day", digits: days, value: date.getDate() };
@@ -71,7 +71,7 @@ const DatePicker: React.FC<DatePickerProps> = ({
                 case "yyyy":
                     return { name: "year", digits: years, value: date.getFullYear() };
                 default:
-                    console.warn(`Invalid date picker format prop: found "${type}" in ${format}. Please read documentation!`)
+                    console.warn(`Invalid date picker format prop: found "${type}" in ${format}!`)
                     return {
                         name: ["day", "month", "year"][index],
                         digits: [days, months, years][index],
@@ -191,7 +191,7 @@ const DateBlock: React.FC<DateBlockProps> = ({
                 setIsLastItem(true);
                 return
             default:
-                setIsFirstItem(false);
+                setIsFirstItem(false)
                 setIsLastItem(false)
         }
     }, [value])
@@ -205,7 +205,7 @@ const DateBlock: React.FC<DateBlockProps> = ({
                     name='chevron-up'
                     height={Constants.ResponsiveSize.f30}
                     width={Constants.ResponsiveSize.f30}
-                    color={isFirstItem ? 'grey' : theme.Colors.primaryLight}
+                    color={!isFirstItem ? 'grey' : theme.Colors.primaryLight}
                 />
             </TouchableOpacity>
 
@@ -214,20 +214,21 @@ const DateBlock: React.FC<DateBlockProps> = ({
                     styles.mark,
                     {
                         top: (height - mHeight) / 2,
-                        backgroundColor: markColor || theme.Colors.primaryLight,
-                        borderColor: theme.Colors.primary,
+                        backgroundColor: markColor || '#EAF4F3',
+                        borderColor: theme.Colors.primaryLight,
                         borderWidth: 1,
                         borderRadius: 5,
                         height: mHeight,
-                        width: mWidth,
+                        width: type === 'year' ? '90%' : mWidth,
                         ...CommonStyles.boxShadow,
-                        elevation: 3,
+                        elevation: 1,
                         shadowColor: theme.Colors.primaryLight
                     }
                 ]}
             />
 
             <ScrollView
+                nestedScrollEnabled={true}
                 ref={scrollRef}
                 style={styles.scroll}
                 snapToOffsets={offsets}
@@ -238,12 +239,12 @@ const DateBlock: React.FC<DateBlockProps> = ({
             >
                 {digits.map((value: number, index: number) => {
                     return (
-                        <TouchableOpacity
+                        <Pressable
                             key={index}
-                            onPress={() => {
-                                onChange(type, digits[index])
-                                snapScrollToIndex(index)
-                            }}
+                            // onPress={() => {
+                            //     onChange(type, digits[index])
+                            //     snapScrollToIndex(index)
+                            // }}
                             onLongPress={onEditingStart}
                         >
                             {showEditing && (
@@ -286,7 +287,7 @@ const DateBlock: React.FC<DateBlockProps> = ({
                                                 ? height / 2 - dHeight / 2
                                                 : 0,
                                             lineHeight: dHeight,
-                                            height: dHeight,
+                                            height: index == digits.length - 1 ? dHeight + 30 : dHeight,
                                         }
                                     ]}
                                 >
@@ -295,7 +296,7 @@ const DateBlock: React.FC<DateBlockProps> = ({
                             )
                             }
 
-                        </TouchableOpacity>
+                        </Pressable>
                     )
                 })}
             </ScrollView>
@@ -306,7 +307,7 @@ const DateBlock: React.FC<DateBlockProps> = ({
                     name='chevron-down'
                     height={Constants.ResponsiveSize.f30}
                     width={Constants.ResponsiveSize.f30}
-                    color={isLastItem ? 'grey' : theme.Colors.primaryLight}
+                    color={!isLastItem ? 'grey' : theme.Colors.primaryLight}
                 />
 
             </TouchableOpacity>

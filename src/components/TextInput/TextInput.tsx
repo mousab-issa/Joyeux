@@ -10,6 +10,7 @@ import { theme } from 'src/common/theme/theme';
 
 import { TextInputTypes } from './types';
 import Constants from 'src/common/constants';
+import { CommonStyles } from 'src/common/styles';
 
 const TextInputStyled: FC<TextInputTypes> = ({ prefix, type, onChange, placeHolder, label }) => {
     return (
@@ -40,22 +41,24 @@ export default TextInputStyled
 
 const styles = StyleSheet.create({
     textInputContainer: {
+        ...CommonStyles.boxShadow,
+        shadowColor: theme.Colors.primaryLight,
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor:theme.Colors.primaryLight,
+        backgroundColor: '#EAF4F3',
+        borderColor: theme.Colors.primaryLight,
         borderRadius: Constants.ResponsiveSize.f10,
-        borderWidth: Constants.ResponsiveSize.f1,
-        borderColor: '#EAF4F3',
+        borderWidth: 2,
         height: Constants.ResponsiveSize.f70,
-        paddingHorizontal:Constants.ResponsiveSize.f28,
-        paddingVertical:Constants.ResponsiveSize.f5,
+        paddingHorizontal: Constants.ResponsiveSize.f28,
+        paddingVertical: Constants.ResponsiveSize.f5,
     },
     prefix: {
         ...theme.Fonts.Main.header2,
         flex: 1,
         padding: Constants.ResponsiveSize.f10,
-        color: theme.Colors.primaryDark,
+        color: theme.Colors.secondaryLight,
         fontWeight: 'bold',
     },
     textInputSyle: {

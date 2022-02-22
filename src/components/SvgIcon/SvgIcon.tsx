@@ -18,7 +18,7 @@ import Menu from 'src/lib/assets/Svg/Menu.svg';
 import MoneyBag from 'src/lib/assets/Svg/money-bag.svg';
 import Wallet from 'src/lib/assets/Svg/wallet.svg';
 import Events from 'src/lib/assets/Svg/notes.svg';
-import Logo from 'src/lib/assets/Svg/Logo.svg';
+import Logo from 'src/lib/assets/Svg/WordMark.svg';
 import Notification from 'src/lib/assets/Svg/Notification.svg';
 import ArrowRightWhite from 'src/lib/assets/Svg/arrow-right-white.svg';
 import Celebration from 'src/lib/assets/Svg/celebration.svg';

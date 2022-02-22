@@ -7,7 +7,7 @@ import { AuthScreenContainer } from 'src/containers';
 
 
 const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
-    
+
     const [isSelected, setIsSelected] = useState([
         {
             id: 1,
@@ -37,7 +37,7 @@ const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
             {isSelected.map((item) => {
                 return (
                     <View key={item.value} style={{ marginVertical: 10 }} >
-                        <Button  onClick={() => onButtonSelected(item)} title={item.label} />
+                        <Button disableStyle={!item.selected} onClick={() => onButtonSelected(item)} title={item.label} />
                     </View>
                 )
             })}
@@ -48,7 +48,7 @@ const Select: FC<{ onSelectAction: () => any }> = ({ onSelectAction }) => {
 const KidsOptionDetailsScreen: FC<{ navigation: any }> = ({ navigation }) => {
     return (
         <AuthScreenContainer>
-            <BottomCardContainer title='Do you kids ?' subTitle='We have a surprise gift for your kids'>
+            <BottomCardContainer title='Do you have kids ?' subTitle='We have a surprise gift for your kids'>
                 <View style={styles.bottomSheetContentContainer}>
                     <View style={{ justifyContent: "center", alignItems: "center" }}>
                         <Select onSelectAction={() => navigation.navigate('AddKids')} />

@@ -3,10 +3,10 @@
 
 import React, { FC, useState } from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
-import { Pressable, StyleSheet, View, Text } from 'react-native'
+import { Pressable, StyleSheet, View, Text, ScrollView } from 'react-native'
 import { theme } from 'src/common/theme/theme';
 
-import { BottomCardContainer, Button, DatePicker, SvgIcon, TextInput } from 'src/components';
+import { BottomCardContainer, Button, ContentWrapper, DatePicker, SvgIcon, TextInput } from 'src/components';
 import { AuthScreenContainer } from 'src/containers';
 
 import Constants, { HEIGHT, WIDTH } from 'src/common/constants';
@@ -80,7 +80,8 @@ const DetailsCard = () => {
                     height={150}
                     value={date}
                     onChange={(value: any) => setDate(value)}
-                    format="yyyy-mm-dd"
+                    format="dd-mm-yyyy"
+
                     startYear={1950}
                     endYear={2022}
                 />
@@ -114,14 +115,17 @@ const AddKidsScreen: FC<{ navigation: any }> = ({ navigation }) => {
     }
 
     return (
-        <AuthScreenContainer>
+        <AuthScreenContainer showLogo={false}>
             <BottomCardContainer title='Do you kids ?' subTitle='We have a surprise gift for your kids'>
                 {
                     KidsArray.map((nKid, index) => {
                         return (
-                            <View key={index} style={styles.row}>
-                                <DetailsCard />
-                            </View>
+                            <ContentWrapper key={index}>
+                                <View style={styles.row}>
+                                    <DetailsCard />
+                                </View>
+                            </ContentWrapper>
+
                         )
                     })
                 }
@@ -140,7 +144,6 @@ const AddKidsScreen: FC<{ navigation: any }> = ({ navigation }) => {
                         <Button iconOnly icon='chevron-right' title='' onClick={() => navigation.navigate('MartialStatus')} />
                     </View>
                 </View>
-
             </BottomCardContainer>
         </AuthScreenContainer>
     );
